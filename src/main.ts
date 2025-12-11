@@ -155,7 +155,7 @@ function playBeep() {
 
 function triggerFlash() {
   elements.dropContainer.classList.remove('flash');
-  void elements.dropContainer.offsetWidth; // Force reflow
+  void elements.dropContainer.offsetWidth; 
   elements.dropContainer.classList.add('flash');
   playBeep();
   if (navigator.vibrate) navigator.vibrate(50);
@@ -165,13 +165,11 @@ function startMetronome() {
   if (state.currentDrops <= 0) return;
 
   elements.modal.classList.remove('hidden');
-  
-  // Affiche UNIQUEMENT le chiffre (ex: "67") dans le titre
   elements.modalInfo.textContent = `${state.currentDrops}`;
   
-  // Couleur sur le SVG via la propriété CSS 'color' (currentColor)
-  const color = state.mode === 'sang' ? '#FF3B30' : 'cyan';
-  elements.dropSvg.style.color = color;
+  const activeColor = state.mode === 'sang' ? '#FF3B30' : '#007AFF';
+  elements.dropSvg.style.color = activeColor;
+  elements.modalInfo.style.color = activeColor;
 
   timeLeft = METRONOME_DURATION;
   elements.timerVal.textContent = timeLeft.toString();
@@ -206,7 +204,7 @@ elements.durPlus.addEventListener('click', () => { state.durIndex++; updateUI();
 elements.btnStart.addEventListener('click', startMetronome);
 elements.btnStop.addEventListener('click', stopMetronome);
 
-// Gestion touche Echap
+// Touche Echap
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     if (!elements.modal.classList.contains('hidden')) {

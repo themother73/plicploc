@@ -1,4 +1,3 @@
-/* Import de la police "Nunito" pour l'effet arrondi type Apple Watch */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap');
 
 :root {
@@ -11,7 +10,6 @@
 }
 
 body {
-  /* Application de la police Arrondie partout */
   font-family: 'Nunito', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -32,7 +30,6 @@ body {
   align-items: center;
 }
 
-/* --- TITRE GÉANT 72px --- */
 h1 {
   font-size: 72px;
   margin: 0 0 20px 0;
@@ -43,7 +40,6 @@ h1 {
   line-height: 1;
 }
 
-/* Onglets */
 .tabs {
   display: flex;
   background-color: #2C2C2E;
@@ -75,7 +71,6 @@ h1 {
   color: #FFF;
 }
 
-/* Selecteurs */
 .selector-container {
   width: 100%;
   display: flex;
@@ -152,7 +147,8 @@ h1 {
 }
 
 .main-result {
-  font-size: 64px;
+  font-size: 72px;
+  /* HARMONISÉ : 72px comme le titre et le métronome */
   font-weight: 800;
   line-height: 1;
   color: var(--primary-solute);
@@ -175,11 +171,12 @@ h1 {
   height: 21px;
 }
 
-/* Bouton Action */
+/* Bouton Action (Accueil) */
 .btn-action {
   width: 100%;
   padding: 16px;
   border-radius: 14px;
+  /* Coins un peu carrés (Squircle) */
   border: none;
   font-size: 18px;
   font-weight: 700;
@@ -194,7 +191,7 @@ h1 {
   transform: scale(0.98);
 }
 
-/* --- MODAL METRONOME (Structure Centrée) --- */
+/* --- MODAL METRONOME --- */
 #metronome-modal {
   position: fixed;
   top: 0;
@@ -207,7 +204,6 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Tout est centré au milieu de l'écran */
   padding: 0 20px;
 }
 
@@ -228,7 +224,7 @@ h1 {
 #drop-element {
   width: 100%;
   height: 100%;
-  color: cyan;
+  color: var(--primary-solute);
   opacity: 0.2;
   transform-origin: center bottom;
   filter: drop-shadow(0 0 15px currentColor);
@@ -258,15 +254,15 @@ h1 {
 
 /* 2. Texte Débit Géant */
 .modal-info {
-  color: #666;
   font-weight: 800;
   font-size: 72px;
-  /* Identique au titre principal */
+  /* IDEM Accueil */
   line-height: 1;
   text-align: center;
   font-variant-numeric: tabular-nums;
   margin-bottom: 5px;
   letter-spacing: -2px;
+  transition: color 0.3s;
 }
 
 .unit-label {
@@ -275,20 +271,28 @@ h1 {
   font-weight: 600;
   opacity: 0.7;
   margin-bottom: 40px;
-  /* Espace avant le bouton */
 }
 
-/* 3. Bouton Arrêter (Centré sous le bloc texte) */
+/* 3. Bouton Arrêter (STYLE HARMONISÉ avec btn-action) */
 .btn-stop {
-  background-color: var(--success);
-  color: #FFF;
-  padding: 18px 40px;
-  border-radius: 40px;
-  font-size: 20px;
-  font-weight: 800;
-  border: none;
-  cursor: pointer;
   width: 100%;
   max-width: 300px;
-  /* Pas de position absolue ou sticky, il suit le flux naturel */
+  padding: 16px;
+  /* Même padding */
+  border-radius: 14px;
+  /* Même arrondi "Squircle" (au lieu de 40px rond) */
+  font-size: 18px;
+  font-weight: 700;
+  /* Même police */
+  border: none;
+  cursor: pointer;
+  background-color: var(--success);
+  color: #FFF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  /* Même ombre */
+  transition: transform 0.1s;
+}
+
+.btn-stop:active {
+  transform: scale(0.98);
 }
