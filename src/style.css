@@ -1,0 +1,294 @@
+/* Import de la police "Nunito" pour l'effet arrondi type Apple Watch */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap');
+
+:root {
+  --primary-solute: #007AFF;
+  --primary-sang: #FF3B30;
+  --bg-color: #000000;
+  --card-bg: #1C1C1E;
+  --text-color: #FFFFFF;
+  --success: #34C759;
+}
+
+body {
+  /* Application de la police Arrondie partout */
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  touch-action: manipulation;
+  user-select: none;
+  min-height: 100vh;
+}
+
+#app {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- TITRE GÉANT 72px --- */
+h1 {
+  font-size: 72px;
+  margin: 0 0 20px 0;
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: var(--primary-solute);
+  transition: color 0.3s;
+  line-height: 1;
+}
+
+/* Onglets */
+.tabs {
+  display: flex;
+  background-color: #2C2C2E;
+  border-radius: 9px;
+  padding: 2px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  padding: 8px;
+  text-align: center;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #8E8E93;
+}
+
+.tab.active-solute {
+  background-color: #FFF;
+  color: #000;
+}
+
+.tab.active-sang {
+  background-color: var(--primary-sang);
+  color: #FFF;
+}
+
+/* Selecteurs */
+.selector-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.selector-row {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #8E8E93;
+  font-weight: 600;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: #3A3A3C;
+  color: #FFF;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.1s;
+}
+
+.btn-circle:active {
+  opacity: 0.6;
+}
+
+.btn-circle:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.btn-blue {
+  color: var(--primary-solute);
+}
+
+.btn-green {
+  color: var(--success);
+}
+
+.value-display {
+  font-size: 22px;
+  font-weight: 800;
+  width: 120px;
+  text-align: center;
+}
+
+/* Resultats */
+.result-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.main-result {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--primary-solute);
+  transition: color 0.3s;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -2px;
+}
+
+.unit {
+  font-size: 16px;
+  color: #8E8E93;
+  margin-top: 5px;
+}
+
+.sub-result {
+  font-size: 18px;
+  color: #8E8E93;
+  margin-top: 5px;
+  font-weight: 500;
+  height: 21px;
+}
+
+/* Bouton Action */
+.btn-action {
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFF;
+  background-color: var(--primary-solute);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s, background-color 0.3s;
+}
+
+.btn-action:active {
+  transform: scale(0.98);
+}
+
+/* --- MODAL METRONOME (Structure Centrée) --- */
+#metronome-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Tout est centré au milieu de l'écran */
+  padding: 0 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* 1. Goutte */
+.drop-anim {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#drop-element {
+  width: 100%;
+  height: 100%;
+  color: cyan;
+  opacity: 0.2;
+  transform-origin: center bottom;
+  filter: drop-shadow(0 0 15px currentColor);
+  transition: color 0.3s;
+}
+
+.flash #drop-element {
+  animation: flashAnim 0.15s ease-out forwards;
+}
+
+@keyframes flashAnim {
+  0% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+
+  20% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+}
+
+/* 2. Texte Débit Géant */
+.modal-info {
+  color: #666;
+  font-weight: 800;
+  font-size: 72px;
+  /* Identique au titre principal */
+  line-height: 1;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 5px;
+  letter-spacing: -2px;
+}
+
+.unit-label {
+  font-size: 18px;
+  color: #666;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-bottom: 40px;
+  /* Espace avant le bouton */
+}
+
+/* 3. Bouton Arrêter (Centré sous le bloc texte) */
+.btn-stop {
+  background-color: var(--success);
+  color: #FFF;
+  padding: 18px 40px;
+  border-radius: 40px;
+  font-size: 20px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: 300px;
+  /* Pas de position absolue ou sticky, il suit le flux naturel */
+}
