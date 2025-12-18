@@ -15,7 +15,7 @@ interface AppState {
 
 // --- DATA ---
 const volumesSolute = [50, 100, 250, 350, 500, 1000, 1500, 3000];
-const durationsSolute = [10, 15, 20, 30, 60, 240, 360, 480, 720, 960, 1440];
+const durationsSolute = [10, 15, 20, 30, 60, 120, 240, 360, 480, 720, 960, 1440];
 
 const volumesSang = [350];
 const durationsSang = [30, 60, 90, 120];
