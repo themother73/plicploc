@@ -1,16 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap');
 
 :root {
-  --primary-solute: #007AFF;
-  --primary-sang: #FF3B30;
+  --primary-solute: #007aff;
+  --primary-sang: #ff3b30;
   --bg-color: #000000;
-  --card-bg: #1C1C1E;
-  --text-color: #FFFFFF;
-  --success: #34C759;
+  --card-bg: #1c1c1e;
+  --text-color: #ffffff;
+  --success: #34c759;
 }
 
 body {
-  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  font-family:
+    'Nunito',
+    system-ui,
+    -apple-system,
+    sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0;
@@ -42,7 +46,7 @@ h1 {
 
 .tabs {
   display: flex;
-  background-color: #2C2C2E;
+  background-color: #2c2c2e;
   border-radius: 9px;
   padding: 2px;
   width: 100%;
@@ -58,17 +62,17 @@ h1 {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #8E8E93;
+  color: #8e8e93;
 }
 
 .tab.active-solute {
-  background-color: #FFF;
+  background-color: #fff;
   color: #000;
 }
 
 .tab.active-sang {
   background-color: var(--primary-sang);
-  color: #FFF;
+  color: #fff;
 }
 
 .selector-container {
@@ -91,7 +95,7 @@ h1 {
 .label-title {
   font-size: 11px;
   text-transform: uppercase;
-  color: #8E8E93;
+  color: #8e8e93;
   font-weight: 600;
 }
 
@@ -106,8 +110,8 @@ h1 {
   height: 44px;
   border-radius: 50%;
   border: none;
-  background-color: #3A3A3C;
-  color: #FFF;
+  background-color: #3a3a3c;
+  color: #fff;
   font-size: 24px;
   display: flex;
   justify-content: center;
@@ -159,13 +163,13 @@ h1 {
 
 .unit {
   font-size: 16px;
-  color: #8E8E93;
+  color: #8e8e93;
   margin-top: 5px;
 }
 
 .sub-result {
   font-size: 18px;
-  color: #8E8E93;
+  color: #8e8e93;
   margin-top: 5px;
   font-weight: 500;
   height: 21px;
@@ -180,11 +184,13 @@ h1 {
   border: none;
   font-size: 18px;
   font-weight: 700;
-  color: #FFF;
+  color: #fff;
   background-color: var(--primary-solute);
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: transform 0.1s, background-color 0.3s;
+  transition:
+    transform 0.1s,
+    background-color 0.3s;
 }
 
 .btn-action:active {
@@ -287,7 +293,7 @@ h1 {
   border: none;
   cursor: pointer;
   background-color: var(--success);
-  color: #FFF;
+  color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   /* Même ombre */
   transition: transform 0.1s;
