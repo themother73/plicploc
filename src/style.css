@@ -325,3 +325,17 @@ h1 {
 .toast.show {
   transform: translateX(-50%) translateY(0);
 }
+
+/* --- FOOTER VERSION --- */
+#app-footer {
+  position: fixed;
+  bottom: 8px;
+  right: 12px;
+  font-size: 10px;
+  color: #8e8e93;
+  opacity: 0.4;
+  font-weight: 600;
+  pointer-events: none;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+}

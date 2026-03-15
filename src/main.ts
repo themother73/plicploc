@@ -64,7 +64,8 @@ const elements = {
   dropSvg: document.getElementById('drop-element')!,
   modalInfo: document.getElementById('modal-info')!,
   timerVal: document.getElementById('timer-val')!,
-  btnStop: document.getElementById('btn-stop')!
+  btnStop: document.getElementById('btn-stop')!,
+  versionVal: document.getElementById('version-val')!
 };
 
 // --- LOGIC ---
@@ -198,6 +199,9 @@ document.addEventListener('keydown', (event) => {
 
 // --- INIT ---
 elements.timerVal.textContent = METRONOME_DURATION_SECONDS.toString();
+// Afficher la version (ex: 0.9.0 -> v0.9)
+const displayVersion = __APP_VERSION__.split('.').slice(0, 2).join('.');
+elements.versionVal.textContent = displayVersion;
 updateUI();
 
 function showToast(message: string) {
