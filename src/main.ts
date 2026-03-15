@@ -14,6 +14,8 @@ import type { AppState, Mode } from './types';
 // @ts-expect-error virtual module
 import { registerSW } from 'virtual:pwa-register';
 
+declare const __APP_VERSION__: string;
+
 // --- STATE ---
 const state: AppState = {
   mode: 'solute',
@@ -216,19 +218,15 @@ function showToast(message: string) {
   }, 3000);
 }
 
-// Vérifier si une mise à jour vient d'avoir lieu
-if (localStorage.getItem('pwa-updated') === 'true') {
-  localStorage.removeItem('pwa-updated');
+// Vérifier si une mise à jour vient d'avoir lieu via la version
+const lastVersion = localStorage.getItem('app-version');
+if (lastVersion && lastVersion !== __APP_VERSION__) {
   showToast('Mise à jour effectuée !');
 }
+localStorage.setItem('app-version', __APP_VERSION__);
 
 // --- PWA UPDATE ---
 const updateSW = registerSW({
-  onNeedRefresh() {
-    // On marque qu'on va recharger pour la mise à jour
-    localStorage.setItem('pwa-updated', 'true');
-    updateSW();
-  },
   onOfflineReady() {
     console.log('App ready to work offline');
   }
