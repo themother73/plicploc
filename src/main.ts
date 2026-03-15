@@ -1,6 +1,7 @@
 import './style.css';
 import { calculateDropsPerMinute, calculateFlowRateMlh } from './calculator';
 import { MetronomeEngine } from './audio';
+import { Haptics } from './haptics';
 import { formatDuration, formatVolume } from './formatting';
 import { METRONOME_DURATION_SECONDS, VOLUMES_SOLUTE, DURATIONS_SOLUTE, VOLUMES_SANG, DURATIONS_SANG } from './constants';
 import type { AppState, Mode } from './types';
@@ -102,6 +103,7 @@ function setMode(newMode: Mode) {
     state.volIndex = 0;
     state.durIndex = 1;
   }
+  Haptics.medium();
   updateUI();
 }
 
@@ -125,6 +127,7 @@ async function startMetronome() {
   elements.timerVal.textContent = timeLeft.toString();
 
   // Démarrer Engine
+  Haptics.medium();
   metronome.start(state.currentDrops);
 
   // Compte à rebours UI (séparé du timing précis du son)
@@ -136,6 +139,7 @@ async function startMetronome() {
 }
 
 function stopMetronome() {
+  Haptics.medium();
   metronome.stop();
   if (countdownInterval) {
     clearInterval(countdownInterval);
@@ -148,10 +152,10 @@ function stopMetronome() {
 elements.tabSolute.addEventListener('click', () => setMode('solute'));
 elements.tabSang.addEventListener('click', () => setMode('sang'));
 
-elements.volMinus.addEventListener('click', () => { state.volIndex--; updateUI(); });
-elements.volPlus.addEventListener('click', () => { state.volIndex++; updateUI(); });
-elements.durMinus.addEventListener('click', () => { state.durIndex--; updateUI(); });
-elements.durPlus.addEventListener('click', () => { state.durIndex++; updateUI(); });
+elements.volMinus.addEventListener('click', () => { state.volIndex--; Haptics.light(); updateUI(); });
+elements.volPlus.addEventListener('click', () => { state.volIndex++; Haptics.light(); updateUI(); });
+elements.durMinus.addEventListener('click', () => { state.durIndex--; Haptics.light(); updateUI(); });
+elements.durPlus.addEventListener('click', () => { state.durIndex++; Haptics.light(); updateUI(); });
 
 elements.btnStart.addEventListener('click', startMetronome);
 elements.btnStop.addEventListener('click', stopMetronome);
