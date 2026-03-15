@@ -19,14 +19,10 @@ export const Haptics = {
 
   /**
    * Retour haptique pour chaque "goutte" du métronome.
-   * On utilise un pattern à deux clics (ON puis OFF) pour s'assurer
-   * que le switch iOS est réinitialisé pour le prochain tick.
+   * On utilise le pattern simple recommandé : 15ms avec intensité 0.4.
    */
   tick: () => {
-    haptics.trigger([
-      { duration: 10, intensity: 1 },
-      { delay: 10, duration: 10, intensity: 1 }
-    ]);
+    haptics.trigger([{ duration: 15 }], { intensity: 0.4 });
   },
 
   /**
