@@ -302,3 +302,26 @@ h1 {
 .btn-stop:active {
   transform: scale(0.98);
 }
+
+/* --- TOAST NOTIFICATION --- */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: var(--success);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  z-index: 200;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}

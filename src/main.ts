@@ -3,8 +3,16 @@ import { calculateDropsPerMinute, calculateFlowRateMlh } from './calculator';
 import { MetronomeEngine } from './audio';
 import { Haptics } from './haptics';
 import { formatDuration, formatVolume } from './formatting';
-import { METRONOME_DURATION_SECONDS, VOLUMES_SOLUTE, DURATIONS_SOLUTE, VOLUMES_SANG, DURATIONS_SANG } from './constants';
+import {
+  METRONOME_DURATION_SECONDS,
+  VOLUMES_SOLUTE,
+  DURATIONS_SOLUTE,
+  VOLUMES_SANG,
+  DURATIONS_SANG
+} from './constants';
 import type { AppState, Mode } from './types';
+// @ts-expect-error virtual module
+import { registerSW } from 'virtual:pwa-register';
 
 // --- STATE ---
 const state: AppState = {
@@ -15,9 +23,10 @@ const state: AppState = {
 };
 
 // --- DATA HELPERS ---
-const getCurrentLists = () => state.mode === 'solute'
-  ? { vols: VOLUMES_SOLUTE, durs: DURATIONS_SOLUTE }
-  : { vols: VOLUMES_SANG, durs: DURATIONS_SANG };
+const getCurrentLists = () =>
+  state.mode === 'solute'
+    ? { vols: VOLUMES_SOLUTE, durs: DURATIONS_SOLUTE }
+    : { vols: VOLUMES_SANG, durs: DURATIONS_SANG };
 
 // --- METRONOME ENGINE ---
 // Callback visuelle appelée à chaque tick (son géré par l'engine)
@@ -152,10 +161,26 @@ function stopMetronome() {
 elements.tabSolute.addEventListener('click', () => setMode('solute'));
 elements.tabSang.addEventListener('click', () => setMode('sang'));
 
-elements.volMinus.addEventListener('click', () => { state.volIndex--; Haptics.light(); updateUI(); });
-elements.volPlus.addEventListener('click', () => { state.volIndex++; Haptics.light(); updateUI(); });
-elements.durMinus.addEventListener('click', () => { state.durIndex--; Haptics.light(); updateUI(); });
-elements.durPlus.addEventListener('click', () => { state.durIndex++; Haptics.light(); updateUI(); });
+elements.volMinus.addEventListener('click', () => {
+  state.volIndex--;
+  Haptics.light();
+  updateUI();
+});
+elements.volPlus.addEventListener('click', () => {
+  state.volIndex++;
+  Haptics.light();
+  updateUI();
+});
+elements.durMinus.addEventListener('click', () => {
+  state.durIndex--;
+  Haptics.light();
+  updateUI();
+});
+elements.durPlus.addEventListener('click', () => {
+  state.durIndex++;
+  Haptics.light();
+  updateUI();
+});
 
 elements.btnStart.addEventListener('click', startMetronome);
 elements.btnStop.addEventListener('click', stopMetronome);
@@ -172,3 +197,54 @@ document.addEventListener('keydown', (event) => {
 // --- INIT ---
 elements.timerVal.textContent = METRONOME_DURATION_SECONDS.toString();
 updateUI();
+
+function showToast(message: string) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  // Animation Entrée
+  requestAnimationFrame(() => {
+    toast.classList.add('show');
+  });
+
+  // Sortie et Suppression
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 500);
+  }, 3000);
+}
+
+// Vérifier si une mise à jour vient d'avoir lieu
+if (localStorage.getItem('pwa-updated') === 'true') {
+  localStorage.removeItem('pwa-updated');
+  showToast('Mise à jour effectuée !');
+}
+
+// --- PWA UPDATE ---
+const updateSW = registerSW({
+  onNeedRefresh() {
+    // On marque qu'on va recharger pour la mise à jour
+    localStorage.setItem('pwa-updated', 'true');
+    updateSW();
+  },
+  onOfflineReady() {
+    console.log('App ready to work offline');
+  }
+});
+
+// Vérifier les mises à jour régulièrement ou quand l'app revient au premier plan
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    updateSW();
+  }
+});
+
+// Optionnel : vérification toutes les heures
+setInterval(
+  () => {
+    updateSW();
+  },
+  60 * 60 * 1000
+);
