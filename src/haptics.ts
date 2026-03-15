@@ -4,37 +4,49 @@ const haptics = new WebHaptics();
 
 export const Haptics = {
   /**
-   * Initialise les haptiques sur une interaction utilisateur.
-   * Indispensable pour iOS avant de pouvoir déclencher via un intervalle.
+   * Démarre une séquence de vibrations pour le métronome.
+   * On génère un pattern long pour tout le contenu afin que Safari iOS
+   * l'accepte (déclenché par une action utilisateur).
    */
-  init: () => {
-    haptics.trigger([{ duration: 1 }], { intensity: 0 });
+  startMetronome: (dropsPerMinute: number, durationSeconds: number) => {
+    const intervalMs = (60 / dropsPerMinute) * 1000;
+    const totalPulses = Math.ceil((durationSeconds * 1000) / intervalMs);
+    const pattern = [];
+
+    for (let i = 0; i < totalPulses; i++) {
+      if (i === 0) {
+        pattern.push({ duration: 15 });
+      } else {
+        pattern.push({ delay: intervalMs - 15, duration: 15 });
+      }
+    }
+
+    haptics.trigger(pattern, { intensity: 0.4 });
   },
 
   /**
-   * Retour haptique léger pour les interactions mineures (boutons +/-)
+   * Arrête toutes les vibrations en cours.
+   */
+  stop: () => {
+    haptics.cancel();
+  },
+
+  /**
+   * Retour haptique pour les interactions mineures (boutons +/-)
    */
   light: () => {
-    haptics.trigger('light');
+    haptics.trigger([{ duration: 15 }], { intensity: 0.4 });
   },
 
   /**
    * Retour haptique moyen pour les actions importantes (start/stop, tabs)
    */
   medium: () => {
-    haptics.trigger('medium');
+    haptics.trigger([{ duration: 25 }], { intensity: 0.7 });
   },
 
   /**
-   * Retour haptique pour chaque "goutte" du métronome.
-   * On utilise le pattern simple recommandé : 15ms avec intensité 0.4.
-   */
-  tick: () => {
-    haptics.trigger([{ duration: 15 }], { intensity: 0.4 });
-  },
-
-  /**
-   * Succès (ex: fin du chrono si on ajoute cette feature)
+   * Succès
    */
   success: () => {
     haptics.trigger('success');

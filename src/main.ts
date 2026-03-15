@@ -127,8 +127,7 @@ async function startMetronome() {
   elements.timerVal.textContent = timeLeft.toString();
 
   // Démarrer Engine
-  Haptics.init();
-  Haptics.medium();
+  Haptics.startMetronome(state.currentDrops, METRONOME_DURATION_SECONDS);
   metronome.start(state.currentDrops);
 
   // Compte à rebours UI (séparé du timing précis du son)
@@ -140,6 +139,7 @@ async function startMetronome() {
 }
 
 function stopMetronome() {
+  Haptics.stop();
   Haptics.medium();
   metronome.stop();
   if (countdownInterval) {

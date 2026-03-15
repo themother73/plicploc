@@ -1,5 +1,3 @@
-import { Haptics } from './haptics';
-
 /**
  * Gère le son et le timing du métronome.
  */
@@ -72,7 +70,5 @@ export class MetronomeEngine {
   private tick() {
     this.playBeep();
     this.onTick();
-    // Vibration via web-haptics (iOS support)
-    Haptics.tick();
   }
 }
