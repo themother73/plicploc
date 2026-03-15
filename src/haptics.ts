@@ -7,7 +7,7 @@ export const Haptics = {
    * Retour haptique léger pour les interactions mineures (boutons +/-)
    */
   light: () => {
-    haptics.trigger([{ duration: 15 }], { intensity: 0.4 });
+    haptics.trigger([{ duration: 15 }], { intensity: 0.8 });
   },
 
   /**
