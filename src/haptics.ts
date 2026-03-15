@@ -1,18 +1,20 @@
-import { trigger } from 'web-haptics';
+import { WebHaptics } from 'web-haptics';
+
+const haptics = new WebHaptics();
 
 export const Haptics = {
   /**
    * Retour haptique léger pour les interactions mineures (boutons +/-)
    */
   light: () => {
-    trigger('light');
+    haptics.trigger('light');
   },
 
   /**
    * Retour haptique moyen pour les actions importantes (start/stop, tabs)
    */
   medium: () => {
-    trigger('medium');
+    haptics.trigger('medium');
   },
 
   /**
@@ -20,13 +22,13 @@ export const Haptics = {
    * On utilise 'light' ou un pattern personnalisé si besoin.
    */
   tick: () => {
-    trigger('light');
+    haptics.trigger('light');
   },
 
   /**
    * Succès (ex: fin du chrono si on ajoute cette feature)
    */
   success: () => {
-    trigger('success');
+    haptics.trigger('success');
   }
 };
