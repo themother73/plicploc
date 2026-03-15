@@ -127,6 +127,7 @@ async function startMetronome() {
   elements.timerVal.textContent = timeLeft.toString();
 
   // Démarrer Engine
+  Haptics.init();
   Haptics.medium();
   metronome.start(state.currentDrops);
 
