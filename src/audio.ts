@@ -74,7 +74,5 @@ export class MetronomeEngine {
     this.onTick();
     // Vibration via web-haptics (iOS support)
     Haptics.tick();
-    // Vibration standard si supportée par le navigateur (Android fallback)
-    if (navigator.vibrate) navigator.vibrate(50);
   }
 }
